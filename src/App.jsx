@@ -50,8 +50,9 @@ let ruderDirection = 2;
 let sailDirection = 0;
 
 function App() {
+  // => Marcel
   let { level } = useParams();
-
+  // => Marcel
   const [refresh, setRefresh] = useState(false);
   const [pauseButton, setPauseButton] = useState(false);
   const [ruderValue, setRuderValue] = useState(2);
@@ -67,7 +68,7 @@ function App() {
   console.log("Speed", speed);
 
   let defaultScene = null;
-
+  // => Marcel
   // blocking scrolling
   useEffect(() => {
     document.querySelector("body").style = "overflow: hidden";
@@ -76,14 +77,14 @@ function App() {
       document.querySelector("body").style = "overflow: auto";
     };
   }, []);
-
+  // => Marcel
   useEffect(() => {
     //back Button from Browser deaktivieren
     history.pushState(null, null, location.href);
     window.onpopstate = function (event) {
       history.go(1);
     };
-
+    // => Marcel
     //set lvl
     if (level === "Landratte") {
       setLandratte(true);
@@ -160,13 +161,13 @@ function App() {
     window.addEventListener("resize", () => {
       sizes.width = window.innerWidth;
       sizes.height = window.innerHeight;
-
+      // => Marcel
       //Update Camera
       defaultScene.camera.aspect = sizes.width / sizes.height;
       defaultScene.camera.updateProjectionMatrix();
       defaultScene.renderer.setSize(sizes.width, sizes.height);
     });
-
+    // => Marcel
     //render the szene
     function render() {
       if (pause && cameraMoveFinished) {
@@ -180,7 +181,7 @@ function App() {
 
       defaultScene.renderer.render(defaultScene.scene, defaultScene.camera);
     }
-
+    // => Marcel
     //Camera movement at the begiign from the game
     let cameraMoveFinished = false;
 
@@ -205,14 +206,14 @@ function App() {
     }
 
     let start = 0;
-
+    // => Marcel
     //Collition detector
     function isCollisionTrigger() {
       setCollition(true);
       pauseFunc();
       setTimeout(() => setShotConfetti(true), 200);
     }
-
+    // => Marcel
     // to far away detector
     function toFarAwayTrigger() {
       setIsToFarAway(true);
@@ -301,15 +302,18 @@ function App() {
       });
     };
 
+    // => Marcel
     //since something is always moving with us it is always reloaded
     defaultScene.renderer.setAnimationLoop(render);
 
+    // => Marcel
     //start camera movement at tge beginning
     setTimeout(startCameraMovement, 1000);
 
     //Skybox
     defaultScene.scene.background = skybox;
 
+    // => Marcel
     //end animation loop if this page is closed!!!
     return function () {
       console.log("end three.js ");
@@ -317,6 +321,7 @@ function App() {
     };
   }, [refresh]);
 
+  // => Marcel
   function restartFunc() {
     setRefresh(!refresh);
     setCollition(false);
@@ -332,23 +337,27 @@ function App() {
     setStartValue(false);
   }
 
+  // => Marcel
   function pauseFunc() {
     setPauseButton(!pauseButton);
     pause = !pause;
     console.log(pause);
   }
 
+  // => Marcel
   const updateRuder = (e) => {
     ruderDirection = e.target.value;
     setRuderValue(e.target.value);
   };
 
+  // => Marcel
   const updateSail = (e) => {
     sailDirection = e.target.value;
     paramsHasChanged = true;
     setSailValue(e.target.value);
   };
 
+  // => Marcel
   return (
     //Overlay Buttons
     <div className="overflow-x-hidden overflow-y-hidden">
